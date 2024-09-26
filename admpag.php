@@ -1,0 +1,741 @@
+<?php 
+// Conexão
+require_once 'conexao.php';
+
+// Sessão
+session_start();
+
+//verificação para nao entrarem na pagina restrita
+if(!isset($_SESSION['logado'])):
+    header('Location: login.php');
+endif;
+
+// dados
+$id = $_SESSION['id_cliente'];
+$sql = "SELECT * FROM clientes WHERE id = '$id'";
+$resultado = mysqli_query($connect, $sql);
+$dados = mysqli_fetch_array($resultado);
+mysqli_close($connect);
+
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAG DO ADM</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/compiler/bootstrap.css">
+
+    <link rel="stylesheet" href="estilo/css/estilo.css">
+    
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+        <div class="container">
+
+        <a class="navbar-brand h1 mb-0" href="admpag.php">Topo</a>
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
+            <span class="navbar-toggler-icon"></span> 
+        </button>
+            
+        <div class="collapse navbar-collapse" id="navbarSite">
+
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Início</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Serviços</a>
+                </li>
+                <li class="nav-item">
+                     <a class="nav-link" href="#">Depoimentos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contatos</a>
+                </li>
+                
+
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDrop">
+                        Social
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Facebook</a>
+                        <a class="dropdown-item" href="#">Instagram</a>
+                        <a class="dropdown-item" href="#">X</a>
+                        
+                    </div>
+                </li>
+            </ul>
+
+            <form class="form-inline">
+                <input class="form-control ml-3 mr-2" type="search" placeholder="Buscar...">
+                <button class="btn btn-dark" type="submit">OK</button>
+                </form>
+        </div>
+            
+        <ul class="navbar-nav ml-3 mr-2">
+                
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="navDrop">
+			<?php echo $dados['login']; ?>
+		</a>
+
+		<div class="dropdown-menu">
+
+            <a class="dropdown-item" href="gerenciador.php" rel="nofollow" title="gerenciar">Gerenciar</a>
+			<a class="dropdown-item" href="index.html" rel="nofollow" title="sair">Sair</a>
+                   
+        </div>
+                </li>
+        </ul>
+    </div>
+
+    </nav>
+
+    <div id="carouselSite" class="carousel slide" data-ride="carousel">
+
+        <ol class="carousel-indicators">
+            <li data-target="#carouselSite" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselSite" data-slide-to="1"></li>
+            <li data-target="#carouselSite" data-slide-to="2"></li>
+
+        </ol>
+
+        <div class="carousel-inner">
+            
+            <div class="carousel-item active"> 
+
+                <img src="img/bebidas-valiosas-jhonnie-walker.jpg" class="img-fluid d-block">
+
+                <div class="carousel-caption d-none-md-block text-light">
+
+                    <h3>RED LABEL</h3>
+                    <p class="lead display-4">Estudo classifica os uísques, vodkas, gins, licores e rums do mundo inteiro com maiores valores de mercado em 2013.</p>
+
+                </div>
+        
+            </div>
+
+            <div class="carousel-item"> 
+
+                <img src="img/bebidas-valiosas-jhonnie-walker.jpg" class="img-fluid d-block">
+
+                <div class="carousel-caption d-none-md-block">
+
+                    <h3>RED LABEL</h3>
+                    <p class="lead display-4">Estudo classifica os uísques, vodkas, gins, licores e rums do mundo inteiro com maiores valores de mercado em 2013.</p>
+
+                </div>
+         
+             </div>
+
+             <div class="carousel-item"> 
+
+                <img src="img/bebidas-valiosas-jhonnie-walker.jpg" class="img-fluid d-block">
+
+                <div class="carousel-caption d-none-md-block">
+
+                    <h3>RED  LABEL</h3>
+                    <p class="lead display-4">Estudo classifica os uísques, vodkas, gins, licores e rums do mundo inteiro com maiores valores de mercado em 2013.</p>
+
+                </div>
+         
+             </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselSite" role="button" data-slide="prev">
+
+            <span class="carousel-control-prev-icon"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselSite" role="button" data-slide="next">
+
+            <span class="carousel-control-next-icon"></span>
+            <span class="sr-only">Avançar</span>
+        </a>
+
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12 mt-5  text-center">
+
+                <h1 class="display-3"><i class="fa fa-globe text-primary"></i>Seja bem-vindo</h1>
+                <p>Bebidas em geral, um apreciativo</p>
+
+            </div>
+
+        </div>
+
+        <div class="row mb-5">
+
+            <div class="col-3">
+
+                <nav id="navbarVertical" class="navbar navbar-light bg-light">
+
+                    <nav class="nav nav-pills flex-column">
+
+                    <a class="nav-link" href="#item1">Inicio</a>
+
+                    <nav class="nav nav-pills flex-column">
+
+                        <a class="nav-link ml-2" href="#item1-1">Contatos</a>
+
+                        <a class="nav-link ml-2" href="#item1-2">Whatsapp</a>
+
+                    </nav>
+
+                    <a class="nav-link my-1" href="#item2">Equipe</a>
+
+                    <nav class="nav nav-pills flex-column">
+
+                        <a class="nav-link" href="#item3">Depoimentos</a>
+
+                    </nav>
+
+                    <nav class="nav nav-pills flex-column">
+
+                        <a class="nav-link ml-2" href="#item4">Serviços</a>
+
+                    </nav>
+
+                    <nav class="nav nav-pills flex-column">
+
+                        <a class="nav-link" href="#item5">Perfil</a>
+
+                    </nav>
+                        
+                    </nav>
+                    
+                    </nav>
+
+                </nav> 
+
+            </div>
+
+            <div class="col-9">
+
+                <div data-spy="scroll" data-target="#navbarVertical" data-offset="0"  style="overflow: auto; height: 380px; position: relative;" > 
+
+                    <h4 id="item1">Mano, muito bom o conteúdo que vc</h4>
+                    <p>É um facto estabelecido de que um leitor é distraído pelo conteúdo legível de uma página quando analisa a sua mancha gráfica. Logo, o uso de Lorem Ipsum leva a uma distribuição mais ou menos normal de letras, ao contrário do uso de "Conteúdo aqui, conteúdo aqui", tornando-o texto legível.</p>
+    
+                    <h5 id="item1-1">Mano, muito bom o conteúdo que vc</h4>
+                    <p>Muitas ferramentas de publicação electrónica e editores de páginas web usam actualmente o Lorem Ipsum como o modelo de texto usado por omissão, e uma pesquisa por "lorem ipsum" irá encontrar muitos websites ainda na sua infância. Várias versões têm evoluído ao longo dos anos, por vezes por acidente</p>
+    
+                    <h5 id="item1-2">Mano, muito bom o conteúdo que vc</h4>
+                    <p>Existem muitas variações das passagens do Lorem Ipsum disponíveis, mas a maior parte sofreu alterações de alguma forma, pela injecção de humor, ou de palavras aleatórias que nem sequer parecem suficientemente credíveis. Se vai usar uma passagem do Lorem Ipsum, deve ter a certeza que não contém nada de embaraçoso escondido no meio do texto.</p>
+                    
+                    <h4 id="item2">Mano, muito bom o conteúdo que vc</h4>
+                    <p>Existem muitas variações das passagens do Lorem Ipsum disponíveis, mas a maior parte sofreu alterações de alguma forma, pela injecção de humor, ou de palavras aleatórias que nem sequer parecem suficientemente credíveis. Se vai usar uma passagem do Lorem Ipsum, deve ter a certeza que não contém nada de embaraçoso escondido no meio do texto.</p>
+                
+                    <h4 id="item3">Mano, muito bom o conteúdo que vc</h4>
+                    <p>Existem muitas variações das passagens do Lorem Ipsum disponíveis, mas a maior parte sofreu alterações de alguma forma, pela injecção de humor, ou de palavras aleatórias que nem sequer parecem suficientemente credíveis. Se vai usar uma passagem do Lorem Ipsum, deve ter a certeza que não contém nada de embaraçoso escondido no meio do texto.</p>
+                    
+                    <h5 id="item4">Mano, muito bom o conteúdo que vc</h5>
+                    <p>Existem muitas variações das passagens do Lorem Ipsum disponíveis, mas a maior parte sofreu alterações de alguma forma, pela injecção de humor, ou de palavras aleatórias que nem sequer parecem suficientemente credíveis. Se vai usar uma passagem do Lorem Ipsum, deve ter a certeza que não contém nada de embaraçoso escondido no meio do texto.</p>
+                
+                    <h5 id="item5">Mano, muito bom o conteúdo que vc</h5>
+                    <p>Existem muitas variações das passagens do Lorem Ipsum disponíveis, mas a maior parte sofreu alterações de alguma forma, pela injecção de humor, ou de palavras aleatórias que nem sequer parecem suficientemente credíveis. Se vai usar uma passagem do Lorem Ipsum, deve ter a certeza que não contém nada de embaraçoso escondido no meio do texto.</p>
+                
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mb-5">
+
+            <div class="col-sm-4">
+
+                <div class="card">
+
+                    <img class="card-img-top" src="img/salute.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">Royale Salute</h4>
+                        <h6 class="card-subtitle mb-2 text-primary">fazendo considerações com card</h6>
+                        <p class="card-text">outro comentário válido, eu entendo que o código fonte copiado do bootstrap venha tudo praticamente em DIV.</p>
+                        <uL class="list-group list-group-flush">
+                            <li class="list-group-item>">Assistindo o curso em 2020</li>
+                            <li class="list-group-item>">Assistindo o curso em 2020</li>
+                            <li class="list-group-item>">Assistindo o curso em 2020</li>
+                         </uL>
+                    </div>
+                    
+                     <div class="card-body">
+                    <a href="#" class="card-link" data-toggle="modal" data-target="#siteModal">Saiba Mais</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+
+                <div class="card">
+                
+                    <img class="card-img-top" src="img/martell.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">Martell</h4>
+                        <h6 class="card-subtitle mb-2 text-primary">fazendo considerações com card</h6>
+                        <p class="card-text">outro comentário válido, eu entendo que o código fonte copiado do bootstrap venha tudo praticamente em DIV.</p>
+                        <uL class="list-group list-group-flush">
+                            <li class="list-group-item>">Assistindo o curso em 2020</li>
+                            <li class="list-group-item>">Assistindo o curso em 2020</li>
+                            <li class="list-group-item>">Assistindo o curso em 2020</li>
+                         </uL>
+                    </div>
+                   
+                        <div class="card-body">
+                    <a href="#" class="card-link" data-toggle="modal" data-target="#siteModal-1">Saiba Mais</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+
+                <div class="card">
+                
+                    <img class="card-img-top" src="img/deveras.jpg">
+                    <div class="card-body">
+                        <h4 class="card-title">Dewar's</h4>
+                        <h6 class="card-subtitle mb-2 text-primary">fazendo considerações com card</h6>
+                        <p class="card-text">outro comentário válido, eu entendo que o código fonte copiado do bootstrap venha tudo praticamente em DIV.</p>
+                        <uL class="list-group list-group-flush">
+                            <li class="list-group-item>">Assistindo o curso em 2020</li>
+                            <li class="list-group-item>">Assistindo o curso em 2020</li>
+                            <li class="list-group-item>">Assistindo o curso em 2020</li>
+                         </uL>
+
+                    </div>
+                   
+                     <div class="card-body">
+                    <a href="#" class="card-link" data-toggle="modal" data-target="#siteModal-2">Saiba Mais</a>
+
+                     </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    
+    </div>
+
+    <div class="jumbotron jumbotron-fluid">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-12 text-center">
+
+                    <h1 class="display-4">Uísques</h1>
+                    <p class="lead">Estudo classifica os uísques, vodkas, gins, licores e rums do mundo inteiro com maiores valores de mercado em 2013.</p>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-12">
+
+                    <ul class="nav nav-pills justify-content-center mb-4" id="pills-nav" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" id="nav-pills-01" data-toggle="pill" href="#nav-item-01">Salute</a>
+                        </li>
+
+                        <li nav-item>
+                            <a class="nav-link" id="nav-pills-02" data-toggle="pill" href="#nav-item-02">Martell</a>
+                        </li>
+
+                        <li nav-item>
+                            <a class="nav-link" id="nav-pills-03" data-toggle="pill" href="#nav-item-03">Dewar's</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content" id="nav-pills-content">
+
+                        <div class="tab-pane fade show active" id="nav-item-01" role="tabpanel">
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="https://youtube.com/embed/92RBm8jefNQ"></iframe>
+                                </div>
+
+
+                            </div>
+
+                                <div class="col-sm-6">
+                                    <p>Ótima didática! Só depois de assistir seus vídeos estou conseguindo assimilar o Bootstrap. Recomendo muito a quem também estava com um pouco de dificuldade. Muito obrigado pelo conteúdo! ;</p>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="tab-pane fade" id="nav-item-02" role="tabpanel">
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="https://youtube.com/embed/jIyGEC6y4o8"></iframe>
+                                    </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+                                <p>Ótima didática! Só depois de assistir seus vídeos estou conseguindo assimilar o Bootstrap. Recomendo muito a quem também estava com um pouco de dificuldade. Muito obrigado pelo conteúdo! ;</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                        <div class="tab-pane fade" id="nav-item-03" role="tabpanel">
+
+                            <div class="row">
+
+                                <div class="col-sm-6">
+
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="https://youtube.com/embed/YjPJv6kVXn0"></iframe>
+                                    </div>
+
+                            </div>
+
+                            <div class="col-sm-6">
+                                <p>Ótima didática! Só depois de assistir seus vídeos estou conseguindo assimilar o Bootstrap. Recomendo muito a quem também estava com um pouco de dificuldade. Muito obrigado pelo conteúdo! ;</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-12 text-center my-5">
+
+                <h1 class="display-4"><i class="fa fa-paper-plane text-primary" aria-hidden="true"></i>Macerces Benz</h1>
+        
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+
+            <div class="col-sm-12 col-md-10 col-lg-8">
+
+                <form>
+
+                    <div class="form row">
+
+                        <div class="form-group col-sm-6">
+
+                            <label for="inputNome">Seu nome</label>
+                            <input type="text" class="form-control" id="inputNome" placeholder="Nome">
+                        </div>
+
+                        <div class="form-group col-sm-6">
+
+                            <label for="inputSobronome">Seu sobrenome</label>
+                            <input type="text" class="form-control" id="inputSobrenome" placeholder="Sobrenome">
+                        </div>
+
+                        <div class="form-group col-sm-6">
+
+                            <label for="inputEnd">Seu endereço</label>
+                            <input type="text" class="form-control" id="inputEnd" placeholder="Endereço">
+                        </div>
+
+                        <div class="form-group col-sm-6">
+
+                            <label for="inputCidade">Sua cidade</label>
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade">
+                        </div>
+
+                        <div class="form-group col-sm-4">
+
+                            <label for="inputEst">Seu estado</label>
+                            <select id="inputEst" class="form-control">
+                                <option selected>Escolha...</option>
+                                <option >Rio Grande do Sul</option>
+                                <option >Rio Grande do Norte</option>
+                                <option >Bahia</option>
+                                <option >Goiás</option>
+                                <option >Distrito Federal</option>
+                                <option >São Paulo</option>
+                                <option >Minas Gerais</option>
+                                <option >Rio de Janeiro</option>
+                                <option >Espirito Santo</option>
+                                <option >Santa Catarina</option>
+                                <option >Mato Grosso</option>
+                                <option >Mato Grosso do Sul</option>
+                                <option >Paraná</option>
+                                <option >Tocantins</option>
+                                <option >Piaui</option>
+                                <option >Sergipe</option>
+                                <option >Alagoas</option>
+                                <option >Pernambuco</option>
+                                <option >Paraíba</option>
+                                <option >Ceará</option>
+                                <option >Maranhão</option>
+                                <option >Pará</option>
+                                <option >Amapá</option>
+                                <option >Amazonas</option>
+                                <option >Acre</option>
+                                <option >Roraima</option>
+                                <option >Rondônia</option>
+
+
+                            </select>
+                        </div>
+
+                        <div class="form-group col-sm-2">
+
+                            <label for="inputCEP">Seu Cep</label>
+                            <input type="text" class="form-control" id="inputCEP">
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-sm-12">
+
+                            <div class="form-check">
+
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox"> Desejo receber via SMS
+                                </label>
+
+                                <div class="form-check">
+
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox"> Desejo receber via E-mail
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col-sm-12">
+
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+
+                            <a tabindex="0" class="btn btn-secondary ml-2" role="button" data-toggle="popover" data-placement="right" data-trigger="focus" title="para mais abra" data-content="Para quem está fazendo o curso em 2019 o código para as fontes só funcionam sem o  no fa, como mostra o exemplo a seguir">AJUDA</a>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-12 mb-3"><hr></div>
+
+                <div class="col-sm-4">
+                    <h3>Uso do Bootstrap</h3>
+                    <p>Minhas considerações finais, apanhei bastante, apanhei denovo, e denovo. Bati muita cabeça, quebrei a cabeça, mas ta ai, tudo isso foi fruto do meu Estudo, curti bastante esse projeto e partiu JavaScript.</p>
+                </div>
+
+            <div class="col-sm-4">
+                <h3>Menu</h3>
+                <div class="list-group text-center">
+                    <a href="#" class="list-group-item list-group-item-action active">Perfil</a>
+                    <a href="#" class="list-group-item list-group-item-action active">Serviços</a> 
+                    <a href="#" class="list-group-item list-group-item-action active">Depoimentos</a> 
+                    <a href="#" class="list-group-item list-group-item-action active">Contatos</a> 
+                
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+
+                <h3>Social</h3>
+
+                <div class="btn-group-vertical btn-block btn-button-lg" role="group">
+                    <a class="btn btn-primary" href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i>Facebook</a>
+                    <a class="btn btn-danger" href="#"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a>
+                    <a class="btn btn-dark" href="#"><i class="fa fa-twitter" aria-hidden="true"></i>X</a>
+
+                </div>
+
+                <div class="col-12 mt-5">
+
+                    <blockquote class="blockquote text-center">
+
+                        <p class="mb-0">Apenas o inicio de meus trabalhos com programação, curti bastante, achei um conteudo muito interessante e vou buscar mais, pois a coisas que fiquei em duvida, muito obrigado por essa oportunidade Marcelo.</p>
+                        <footer class="blockquote-footer">Eu Mesmo <cite title="Titulo"> Fundador deste Site</cite></footer>
+
+                    </blockquote>
+
+            </div> 
+
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+     <div class="modal fade" id="siteModal" tabindex="-2" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Royale Salute</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                     </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>O Modal é o componente perfeito para você exibir imagens com efeito Lightbox, mostrar notificações ou até criar caixas de diálogo em seu site.
+                        Nesta aula você irá aprender as diferentes formas de personalização do Modal com Bootrastrap 4 para soltar a criatividade na hora de produzir seu próximo projeto.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </div>
+
+            </div>
+        </div>
+     </div>
+     <div class="modal fade" id="siteModal-1" tabindex="-2" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Martell</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                     </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>O Modal é o componente perfeito para você exibir imagens com efeito Lightbox, mostrar notificações ou até criar caixas de diálogo em seu site.
+                        Nesta aula você irá aprender as diferentes formas de personalização do Modal com Bootrastrap 4 para soltar a criatividade na hora de produzir seu próximo projeto.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </div>
+
+            </div>
+        </div>
+     </div>
+     <div class="modal fade" id="siteModal-2" tabindex="-2" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Deveras</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                     </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>O Modal é o componente perfeito para você exibir imagens com efeito Lightbox, mostrar notificações ou até criar caixas de diálogo em seu site.
+                        Nesta aula você irá aprender as diferentes formas de personalização do Modal com Bootrastrap 4 para soltar a criatividade na hora de produzir seu próximo projeto.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                </div>
+
+            </div>
+        </div>
+     </div>
+
+     <div id="popup" class="popup">
+        <div class="popup-content">
+            <span id="close-btn" class="close-btn">&times;</span>
+            <h2><b>Bem-vindo de volta ADM!</b></h2>
+            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        $ (function () {
+
+            $('[data-toggle="popover"]').popover()
+
+        })
+    </script>
+  </body>
+</html>
+</body>
+</html>
